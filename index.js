@@ -86,18 +86,14 @@ class Car {
     this.tank += gallons;
   }
   drive(distance) {
-    let maxDistance = this.tank * this.milesPerGallon;
-    if (distance < maxDistance) {
-      this.odometer += distance;
-      this.tank -= distance / this.milesPerGallon;
-    } else if (distance >= maxDistance) {
-      this.odometer += maxDistance;
-      this.tank -= maxDistance / this.milesPerGallon;
-      return `I ran out of fuel at ${this.odometer} miles!`
+    if (distance >= this.tank * this.milesPerGallon) {
+      return this.odometer += this.tank * this.milesPerGallon, this.tank = 0, `I ran out of fuel at ${this.odometer} miles!`;
+    }
+    else {
+      return this.odometer += distance, this.tank -= distance / this.milesPerGallon;
     }
   }
 }
-
 /*
   TASK 3
     - Write a Lambdasian class.
@@ -178,16 +174,16 @@ class Student extends Lambdasian {
     this.favSubjects = person.favSubjects;
     this.grade = 90; //stretch challenge
   }
-  listSubjects(){
+  listSubjects() {
     return `${this.favSubjects}`
   }
-  PRAssignment(subject){
+  PRAssignment(subject) {
     return `${this.name} has submitted a PR for ${subject}`;
   }
-  sprintChallenge(subject){
+  sprintChallenge(subject) {
     return `${this.name} has begun a sprint challenge on ${subject}`;
   }
-  graduate(){ // stretch challenge
+  graduate() { // stretch challenge
     if (this.grade > 70) {
       return `${this.name} is ready to graduate!`;
     } else {
@@ -215,10 +211,10 @@ class ProjectManager extends Instructor {
     this.gradClassName = person.gradClassName;
     this.favInstructor = person.favInstructor;
   }
-  standUp(channel){
+  standUp(channel) {
     return `${this.name} announces to ${channel}, @channel standup times!`
   }
-  debugsCode(student, subject){
+  debugsCode(student, subject) {
     return `${this.name} debugs ${student.name}'s code on ${subject}`;
   }
 }
